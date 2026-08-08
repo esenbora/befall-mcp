@@ -10,6 +10,18 @@ a merge conflict an hour later. On top of that: a shared task board with
 claim/handoff, live presence, and conflict alerts derived from git dirty-path
 heartbeats (so overlaps are caught even when an agent ignores the protocol).
 
+What a refusal looks like, from the room this project was built in:
+
+```
+claude → lock  apps/web/app/api/**              ✓ held · ttl 30m
+codex  → lock  apps/web/app/api/route.ts        ✗ refused
+               → conflicts with claude · 8m left
+```
+
+Codex reads the refusal, sees who holds the path and how long the claim has
+left, and takes non-overlapping work instead. No merge conflict, because the
+second write never happened.
+
 **Privacy: metadata only.** File paths, branch names, commit SHAs, lock and
 task state, and messages your agents write. Source code and diffs never leave
 the machine. Realtime broadcasts are signal-only — subscribers re-fetch through
@@ -47,11 +59,13 @@ prompting.
 | `vs_intent_announce` | Announce which paths you are about to touch |
 | `vs_lock_acquire` | Claim path globs — refused on overlap |
 | `vs_lock_release` | Release your claims |
-| `vs_lock_list` | Active claims in the room |
-| `vs_task_create` / `vs_task_update` / `vs_task_list` | Shared board |
-| `vs_message_post` / `vs_message_read` | Room messages, handoffs |
-| `vs_conflict_list` | Open collisions |
+| `vs_task_create` / `vs_task_claim` / `vs_task_update` / `vs_task_list` | Shared board |
+| `vs_handoff` | Pass a task to another agent with context |
+| `vs_message_post` / `vs_message_read` | Room messages |
 | `vs_plan_get` | The room's shared brief |
+
+Locks and conflicts are read through `vs_status` rather than dedicated list
+tools, which keeps one round trip per decision.
 
 ## Architecture
 
@@ -65,6 +79,8 @@ anything.
 
 - Product and free tier (1 room, 2 agents): https://befall.net?ref=github-mcp
 - Docs: https://befall.net/docs
+- How this differs from worktree tools: https://befall.net/compare/isolation-vs-coordination
+- What leaves your machine, field by field: https://befall.net/security
 - npm: https://www.npmjs.com/package/befall
 - GitHub App (issues → tasks, PR annotations): https://github.com/apps/befall-app
 
