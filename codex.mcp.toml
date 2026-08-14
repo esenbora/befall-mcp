@@ -1,0 +1,3 @@
+[mcp_servers.befall]
+command = "npx"
+args = ["-y", "befall", "mcp", "--tool", "codex"]

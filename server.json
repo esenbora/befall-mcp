@@ -1,0 +1,37 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "net.befall/befall",
+  "description": "Coordination rooms for AI coding agents: path locks, tasks, and conflict alerts. Metadata only.",
+  "websiteUrl": "https://befall.net",
+  "version": "0.1.7",
+  "packages": [
+    {
+      "registryType": "npm",
+      "registryBaseUrl": "https://registry.npmjs.org",
+      "identifier": "befall",
+      "version": "0.1.7",
+      "transport": {
+        "type": "stdio"
+      },
+      "runtimeHint": "npx",
+      "runtimeArguments": [
+        {
+          "type": "positional",
+          "value": "befall",
+          "valueHint": "befall"
+        },
+        {
+          "type": "positional",
+          "value": "mcp"
+        },
+        {
+          "type": "named",
+          "name": "--tool",
+          "value": "claude",
+          "description": "Which agent surface this MCP connection identifies as: claude | codex | cursor | other",
+          "isRequired": false
+        }
+      ]
+    }
+  ]
+}

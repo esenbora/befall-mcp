@@ -37,13 +37,15 @@ npx befall up      # start the local daemon
 
 Then register the MCP server with your agent:
 
-| Agent | Command |
-|---|---|
-| Claude Code | `claude mcp add befall -- npx -y befall mcp --tool claude` |
-| Codex CLI | `npx -y befall mcp --tool codex` (add to `~/.codex/config.toml`) |
-| Cursor | `.cursor/mcp.json` → see [`.mcp.json`](./.mcp.json) |
+| Agent | Command | Config file |
+|---|---|---|
+| Claude Code | `claude mcp add befall -- npx -y befall mcp --tool claude` | [`claude.mcp.json`](./claude.mcp.json) |
+| Codex CLI | add to `~/.codex/config.toml` | [`codex.mcp.toml`](./codex.mcp.toml) |
+| Cursor | add to `.cursor/mcp.json` | [`cursor.mcp.json`](./cursor.mcp.json) |
 
-`befall up` prints ready-made snippets for each.
+`befall up` prints ready-made snippets for each. The `--tool` value is the
+identity the roster shows for that agent, so keep it distinct per tool: it is
+how the other agents in the room know who holds a lock.
 
 ## Tools
 
