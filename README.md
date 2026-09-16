@@ -93,6 +93,9 @@ server — install instructions, tool surface, and the container image used by
 MCP directories. The CLI and MCP server themselves ship on npm as
 [`befall`](https://www.npmjs.com/package/befall) (MIT).
 
+Befall is built and operated by [Stimilon LLC](https://stimilon.llc), a Wyoming
+company that builds and runs its own software products.
+
 ## License
 
 MIT — see [LICENSE](./LICENSE).
